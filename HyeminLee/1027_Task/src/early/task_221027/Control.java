@@ -240,26 +240,23 @@ public class Control {
 			
 			
 			public void practice11() {
-				
-				
+
 				Scanner sc = new Scanner(System.in);
-				
+
 				System.out.print("시작 숫자 : ");
 				int num = sc.nextInt();
-				
+
 				System.out.print("공차 숫자 : ");
 				int dif = sc.nextInt();
-		
-	// 출력은 10번만
-	// 옆으로 나란히, 차이는 계속 있고
-			
-				for (int i=1;i<=10;i++) {
+
+				// 출력은 10번만
+				// 옆으로 나란히, 차이는 계속 있고
+
+				for (int i = 1; i <= 10; i++) {
 					System.out.print(num + " ");
 					num += dif;
 				}
-				
-				
-				
+
 			}
 			
 			
