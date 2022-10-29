@@ -16,10 +16,13 @@ public class Run_Control {
 //		c.practice2();
 //		c.practice3();
 //		c.practice4();
-		c.practice5();
-		
-		
-		
+//		c.practice5();
+//		c.practice6();
+//		c.practice7();
+//		c.practice8();
+//		c.practice9();
+//		c.practice10();
+		c.practice11();
 		
 		
 		
