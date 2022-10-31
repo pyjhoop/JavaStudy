@@ -1,6 +1,7 @@
 package run;
 
 import array.A_Array;
+import array.B_ArrayCopy;
 
 public class Run {
 	public static void main(String[] args) {
@@ -14,6 +15,12 @@ public class Run {
 //		a.method8();
 //		a.method9();
 //		a.method10();
-		a.method11();
+//		a.method11();
+		B_ArrayCopy b = new B_ArrayCopy();
+//		b.method1();
+//		b.method2();
+//		b.method3();
+//		b.method4();
+		b.method5();
 	}
 }
