@@ -111,6 +111,8 @@ public class Control {
 			
 			
 			
+			
+			
 			public void practice6() {
 
 				Scanner sc = new Scanner(System.in);
@@ -260,10 +262,126 @@ public class Control {
 			}
 			
 			
+
+			public void practice12() {
+
+				Scanner sc = new Scanner(System.in);
+
+				// 정수 두개 입력받고 입력된 연산자에따라 알맞은값
+				while (true) {
+
+					System.out.print("연산자 : ");
+
+					String op3 = sc.nextLine();
+					char op = op3.charAt(0);
+					boolean op2 = (op == '+' || op == '-' || op == '/' || op == '%' || op == '*');
+
+					if (op3.equals("exit")) {
+						System.out.println("프로그램을 종료합니다");
+						return;
+					} else
+
+						System.out.print("첫 숫자 : ");
+					int num = sc.nextInt();
+
+					System.out.print("두번째 숫자 : ");
+					int ber = sc.nextInt();
+
+					sc.nextLine();
+					if (op == '/' && ber == 0) {
+						System.out.println("0으로 나눌수 없습니다. 다시 입력해주세요");
+						continue;
+					} else if (!(op2)) {
+						System.out.println("없는 연산자 입니다 다시 입력해죠용!-");
+					}
+
+					switch (op) {
+
+					case '+':
+						System.out.printf("%d %c %d = %d", num, op, ber, (num + ber));
+						break;
+					case '-':
+						System.out.printf("%d %c %d = %d", num, op, ber, (num - ber));
+						break;
+					case '%':
+						System.out.printf("%d %c %d = %d", num, op, ber, (num % ber));
+						break;
+					case '/':
+						System.out.printf("%d %c %d = %d", num, op, ber, (num / ber));
+						break;
+					case '*':
+						System.out.printf("%d %c %d = %d", num, op, ber, (num * ber));
+						break;
+
+					}
+
+					System.out.println();
+				}
+
+			}
 			
 			
+			public void practice13() {
+
+				Scanner sc = new Scanner(System.in);
+
+				System.out.print(" 정수 입력 : ");
+				int num = sc.nextInt();
+
+				for (int i = 1; i <= num; i++) {  // int i=0;으로 하면 입력한 정수보다 한줄 더 나옴
+					for (int j = 1; j <= i; j++) {
+
+						System.out.print("*");
+					}
+
+					System.out.println();
+
+				}
+
+
+			}
 			
+			//피라미드 만드는 공식
 			
+//			for (int i = 1; i <= num; i++) {  ==> 입력받은 값만큼 i<=num
+//				for (int j = 1; j <= i; j++) {  ==> j <= i
+//
+//					System.out.print("*");
+//				}
+//
+//				System.out.println();
+			
+			public void practice14() {
+				
+				Scanner sc = new Scanner(System.in);
+
+				System.out.print(" 정수 입력 : ");
+				int num = sc.nextInt();
+
+				for (int i = 0; i < num; i++) {   // 얘는 왜.. 0??
+					for (int j = 0; j+i < num; j++) {  // j+i < num??? @_@
+
+						System.out.print("*");
+					}
+
+					System.out.println();
+
+				}
+				
+				// 이건 모르겠다 @_@
+				
+				
+//				 정수 입력 : 4
+//				 ****
+//				 ***
+//				 **
+//				 *
+				
+				
+				
+				
+				
+			}
 			
 	
 	//
