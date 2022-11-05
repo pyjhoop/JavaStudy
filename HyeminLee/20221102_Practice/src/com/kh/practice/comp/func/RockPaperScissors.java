@@ -4,137 +4,113 @@ import java.util.Scanner;
 
 public class RockPaperScissors {
 
-	
-	//------------가위 바위 보 -----------
-	//...평생 가위바ㅜ이보 져라
-	
-	
-	public void rps() {
-		
+public void rps() {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("당신의 이름은~? : ");
+		System.out.print("당신의 이름을 입력해주세요 : ");
 		String name = sc.nextLine();
 		
 		
-		
+		int count = 0;
 		int win = 0;
 		int lose = 0;
-		int count = 0;
-		int mu = 0;
-		
-		String exit = "exit";
+		int tie = 0;
 		
 		
-		String com = " ";
-		int vs=0;
 		
 		
-		while (true) {
+		while(true) { //while start
 			
-			System.out.print("가위 바~위 보! : ");
-			String str = sc.nextLine();
+			System.out.print("가위 바위 보 : ");
+			String rsp = sc.nextLine(); 
 			
-			count++;
+			int random = (int)(Math.random()*3+1);
 			
-			if(str.equals("exit")) {
-				System.out.println(count+"전 "+win+"승 "+ mu+"무 "+lose+"패");
-			} else  {
+			String com = " ";
 			
-		//랜덤값 수를 통해 결정
-		int random = (int)(Math.random()*3+1); // 1 2 3
+			
+			switch(random) {
+			
+			case 1 : com = "가위"; break;
+			case 2 : com = "바위"; break;
+			case 3 : com = "보"; break;
+			
+			} // switch end
+			
+			
+			
+			
+			if (rsp.equals("exit")) {
+				System.out.println(count+"전 " + win+"승 " + tie+"무 "+ lose+"패 ");
+				return;
 				
-		
-		
-
-		
-		
-		
-		// 랜덤값 1은 뭐뭐다 라고 코드 어떻게 짜지??
-		switch(random) {
-		case 1:
-			com = "가위";
-			break;
-		case 2:
-			com = "주먹";
-			break;
-		case 3:
-			com = "보";
-			break;
-		}
-	
-		
-		
-//		switch(str) {
-//		case "가위" : 
-//			vs = 1;
-//			break;
-//		case "바위" : 
-//			vs = 2;
-//			break;
-//		case "보" : 
-//			vs = 3;
-//			break;
-//			
-//			
-//		}
-	
-		
-		
-		if (str.equals("가위") || str.equals("바위") || str.equals("보")) {
-			
-		
-		if (str.equals("가위")) {
-			
-		}
-			
-			
-			
-
-			
-			
-			
-			
-			
-			
-			
-			//숫자가 문자열로 출력되게 만들어야함!
-			//가위바위보 내가 입력한것도 승패 비교하게 만들기
+			} else if (rsp.equals("가위") || rsp.equals("바위")|| rsp.equals("보")){
+				count++;
+				System.out.print("컴퓨터 '-')o : "+com);
+				System.out.println();
+				System.out.print(name+" : "+rsp);
+				System.out.println();
+				
+				
+				if(com.equals("가위")) {
+					if(rsp.equals("가위")) {
+						System.out.println("------ 비겼습니댜 ---------");
+						tie++;
+					} else if (rsp.equals("바위")) {
+						System.out.println("------- 이겼습니당 >0< ---------");
+						win++;
+					} else {
+						System.out.println("------ 졌습니다 ㅠ0ㅠ ------");
+						lose++;
+					}
+				} else if (com.equals("바위")) {
+					
+					if(rsp.equals("가위")) {
+						System.out.println("------ 졌습니다 ㅠ0ㅠ ------");
+						lose++;
+					} else if (rsp.equals("바위")) {
+						System.out.println("------ 비겼습니댜 ---------");
+						tie++;
+					} else {
+						System.out.println("------- 이겼습니당 >0< ---------");
+						win++;
+					}
+					
+				} else { // 보 일경우
+					
+					if(rsp.equals("가위")) {
+						System.out.println("------- 이겼습니당 >0< ---------");
+						win++;
+					} else if (rsp.equals("바위")) {
+						System.out.println("------ 졌습니다 ㅠ0ㅠ ------");
+						lose++;
+					} else {
+						System.out.println("------ 비겼습니댜 ---------");
+						tie++;
+					}
+					
+					
+				} // 이김,비김,지는거 if문 끝
+				
+				
+				
+			} else { // 가위 바위보가 맞는지 if문 끝 / 아닐경우 시작
+				System.out.println("다시 제대로 입력해주세용~");
+				 System.out.println();
+			} // if exit end
 			
 			
 			
-			System.out.println("컴 : " /*랜덤값이 한글로 나와야함*/ );
-			System.out.println(name + " : " + str);
-			
-		
-			
-			
-			
-			
-			
-			
-		}else {
-			System.out.println("잘못입력했어용!");
-			System.out.println();
-			
-			
-			
-			
-			//exit 탈출하면 몇회 몇승 몇무 몇패 나타나기
-			
-			
-		 
+		}// while end
 		
 		
 		
-	}// w
+		
+	} //rps end
 	
 	
-		}
-	}
 	
-}
 
 
 
