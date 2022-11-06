@@ -25,7 +25,7 @@ public class Run {
 		
 		RockPaperScissors r = new RockPaperScissors();
 		
-//		r.rps();
+		r.rps();
 		
 		
 
