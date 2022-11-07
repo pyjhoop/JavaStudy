@@ -17,9 +17,10 @@ class Shape{
 	}
 }
 
-class Point {
+class Point{
 	int x;
 	int y;
+	
 	Point(int x, int y){
 		this.x = x;
 		this.y = y;
@@ -28,7 +29,7 @@ class Point {
 		this(0,0);
 	}
 	String getXY() {
-		return "("+x+","+y+")";
+		return "("+x+", "+y+")";
 	}
 }
 
@@ -44,9 +45,10 @@ class Circle extends Shape{
 		this(new Point(0,0),100);
 	}
 	void draw() {
-		System.out.printf("[center=(%d, %d), r=%d, color=%s]\n",center.x,center.y,r,color);
+		System.out.printf("[center=(%d, %d), r=%d, color=%s]\n",center.x, center.y, r, color);
 	}
 }
+
 class Triangle extends Shape{
 	Point[] p = new Point[3];
 	
@@ -54,6 +56,8 @@ class Triangle extends Shape{
 		this.p = p;
 	}
 	void draw() {
-		System.out.printf("[p1=%s, p2=%s, p3=%s, color=%s]\n",p[0].getXY(),p[1].getXY(),p[2].getXY(),p[3].getXY(),color);
+		System.out.printf("[p1=%s, p2=%s, p3=%s, color=%s\n",p[0].getXY(),p[1].getXY(), p[2].getXY(),color);
 	}
 }
+
+
