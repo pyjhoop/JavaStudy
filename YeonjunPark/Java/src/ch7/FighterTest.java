@@ -7,7 +7,7 @@ public class FighterTest {
 			System.out.println("f는 Unit클래스 자손입니다.");
 		}
 		
-		if(f instanceof Fighterable) {
+		if(f instanceof Fighterable){
 			System.out.println("f는 Fightable인터페이스를 구현했습니다.");
 		}
 		
