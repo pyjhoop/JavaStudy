@@ -8,7 +8,7 @@ import eatout.model.vo.Sushi;
 
 public class EatRun {
 
-	// 배열 잘못건들...무한루프 돔 -- 수정요망
+	// =_=... 뭔가 아닌데 일단..ㅇㅋ
 	
 	public static void main(String[] args) {
 
@@ -23,7 +23,6 @@ public class EatRun {
 		su[4] = new Sushi("4. 성게알 초밥", 5500);
 		su[5] = new Sushi("5. 생새우 초밥", 2000);
 		su[6] = new Sushi("6. 가리비 초밥", 1000);
-//		su[7] = new Sushi("식사 종료");
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -53,18 +52,19 @@ public class EatRun {
 			while (true) {
 				if (num == 1 && order == 1) {
 
-				for (int i=0; i<su.length-1; i++){
+				for (int i=0; i<su.length; i++){
 					System.out.println(su[i].infor());
 				}
-//				System.out.println(su[8].getResturant());
+				System.out.println("99. 식사종료 종료");
 				System.out.print("번호를 입력해주세요 : ");
 				try {
 					int menu = sc.nextInt();
 					sc.nextLine();
 					if (menu > 0 && menu < 7) {
 						sum += su[menu].getPrice();
-						System.out.println(su[menu].infor() + " --- 총 금액은 : " + sum + "입니다 ^^");
-					}else if (menu==8){
+						System.out.println(su[menu].getName() + " --- 누적 금액은 : " + sum + "입니다 ^^");
+					}else if (menu==99){
+						System.out.println();
 						System.out.println("식사금액 총 " + sum + "원 나왔습니다");
 						break;
 						
@@ -82,9 +82,9 @@ public class EatRun {
 		
 		
 				// 1번
-			System.out.print("추가 주문하시겠습니까? 종료하시면 주문하신 음식 가져다드리겠습니다 (y/n) : ");
-			char yn = sc.nextLine().toUpperCase().charAt(0);
-			if (yn == 'N') {
+//			System.out.print("추가 주문하시겠습니까? 종료하시면 주문하신 음식 가져다드리겠습니다 (y/n) : ");
+//			char yn = sc.nextLine().toUpperCase().charAt(0);
+//			if (yn == 'N') {
 				System.out.println();
 				System.out.println("냠냠냠 '3' 아이 맛있다~");
 //				System.out.print("그만 드시겠습니까? (y/n) : ");
@@ -104,29 +104,32 @@ public class EatRun {
 //				System.out.println("---------------------------");
 //				continue;
 				// 잘못입렸했을때 1번으로만 돌아가고싶은데..씁
-			}
+//			}
 				} else if (num==1 && order ==2) {
 					while(true) {
-						int random = (int)(Math.random()*8);
 						System.out.println();
+						int random = (int)(Math.random()*7);
 						System.out.println(su[random].infor());
 						
-						System.out.print("1번 먹기 / 2번 다른 초밥기다리기 "+su[8].getResturant());
+						System.out.print("1번 먹기 / 2번 다른 초밥기다리기 / 99번 식사종료 : ");
 						int ran = sc.nextInt();
 						sc.nextLine();
 						if (ran==2) {
 							continue;
 						} else if (ran==1) {
 							sum += su[random].getPrice();
-							System.out.println(su[random].infor() + " --- 총 금액은 : " + sum + "입니다 ^^");
-						}else if (ran==3) {
+							System.out.println(su[random].getName() + " --- 누적 금액은 : " + sum + "입니다 ^^");
+						}else if (ran==99) {
 							break;
+						}else {
+							System.out.println("다시 입력해주세요");
+							continue;
+							
 						}
 						
-						System.out.println("다시 입력해주세요");
-						continue;
 					}
-					
+					System.out.println("식사금액 총 " + sum + "원 나왔습니다");
+					break;
 				}
 
 
@@ -141,12 +144,15 @@ public class EatRun {
 		int money = rs.balance(sum, pay);
 		
 		if (sum>pay) {
-			System.out.println(pay + "원 장난해요? " + money + "원만큼 돈이 모자라요 다시 입금해주세요..-_-+ ");
-		} else {
+			System.out.println(pay + "원 장난해요? 돈이 모자라요 다시 입금해주세요..-_-+ ");
+		} else if(sum==pay) {
+			System.out.println("깔끔한 계산이네용! 감사합니다 또 오세용!");
+		}
+		else {
 			System.out.println("여기 잔액 " + money + "원 입니다 감사합니다 또오세요 >_<");
+			return;
 		}
 		
-			
 		// 돈을 작게줘서 계속 돈을 받으면서 - 누적금액에서 까서 나중에 잔액나오는거는 어떻게 할수있을깡
 
 		}
