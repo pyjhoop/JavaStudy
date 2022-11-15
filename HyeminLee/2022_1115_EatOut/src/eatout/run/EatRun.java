@@ -14,15 +14,16 @@ public class EatRun {
 
 		Resturant rs = new Sushi();
 
-		Sushi[] su = new Sushi[7];
+		Sushi[] su = new Sushi[8];
 
-		su[0] = new Sushi("0. 새우 초밥", 1500);
+		su[0] = new Sushi("뱅글뱅글 초밥집", 9900, "0번 식사종료 ");
 		su[1] = new Sushi("1. 소고기 초밥", 3500);
 		su[2] = new Sushi("2. 연어 초밥", 2500);
 		su[3] = new Sushi("3. 한치 초밥", 2000);
 		su[4] = new Sushi("4. 성게알 초밥", 5500);
 		su[5] = new Sushi("5. 생새우 초밥", 2000);
 		su[6] = new Sushi("6. 가리비 초밥", 1000);
+		su[7] = new Sushi("7. 새우 초밥", 1500);
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -49,21 +50,22 @@ public class EatRun {
 
 		} //  주문&회전 if문
 
+		System.out.println(su[0].toString());
 			while (true) {
 				if (num == 1 && order == 1) {
 
-				for (int i=0; i<su.length; i++){
+				for (int i=1; i<su.length; i++){
 					System.out.println(su[i].infor());
 				}
-				System.out.println("99. 식사종료 종료");
+				System.out.println("식사 종료를 원하시면 0번을 입력해주세요");
 				System.out.print("번호를 입력해주세요 : ");
 				try {
 					int menu = sc.nextInt();
 					sc.nextLine();
-					if (menu > 0 && menu < 7) {
+					if (menu > 0 && menu < 8) {
 						sum += su[menu].getPrice();
 						System.out.println(su[menu].getName() + " --- 누적 금액은 : " + sum + "입니다 ^^");
-					}else if (menu==99){
+					}else if (menu==0){
 						System.out.println();
 						System.out.println("식사금액 총 " + sum + "원 나왔습니다");
 						break;
@@ -108,10 +110,10 @@ public class EatRun {
 				} else if (num==1 && order ==2) {
 					while(true) {
 						System.out.println();
-						int random = (int)(Math.random()*7);
+						int random = (int)(Math.random()*7+1);
 						System.out.println(su[random].infor());
 						
-						System.out.print("1번 먹기 / 2번 다른 초밥기다리기 / 99번 식사종료 : ");
+						System.out.print("1번 먹기 / 2번 다른 초밥기다리기 / 0번 식사종료 : ");
 						int ran = sc.nextInt();
 						sc.nextLine();
 						if (ran==2) {
@@ -119,7 +121,7 @@ public class EatRun {
 						} else if (ran==1) {
 							sum += su[random].getPrice();
 							System.out.println(su[random].getName() + " --- 누적 금액은 : " + sum + "입니다 ^^");
-						}else if (ran==99) {
+						}else if (ran==0) {
 							break;
 						}else {
 							System.out.println("다시 입력해주세요");

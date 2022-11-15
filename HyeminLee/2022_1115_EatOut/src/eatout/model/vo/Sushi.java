@@ -31,7 +31,7 @@ public class Sushi extends Resturant {
 
 	@Override
 	public String toString() {
-		return super.toString() + ", 총 금액은 : " + total;
+		return super.toString();
 	}
 	
 	

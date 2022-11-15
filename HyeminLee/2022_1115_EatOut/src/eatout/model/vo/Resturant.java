@@ -49,7 +49,7 @@ public abstract class Resturant implements basic {
 
 	@Override
 	public String toString() {
-		return resturant + "식당 음식명 : " + name + ", 가격은 : " + price + "원";
+		return resturant + "[식당 음식명 : " + name + ", 가격은 : " + price + "원까지 있습니다]";
 	}
 
 	public String infor() {
