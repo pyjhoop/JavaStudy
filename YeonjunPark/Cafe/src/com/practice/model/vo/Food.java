@@ -3,14 +3,12 @@ package com.practice.model.vo;
 public class Food {
 	private String name;
 	private int price;
-	private boolean takeOut;
 	
 	public Food() {}
 
-	public Food(String name, int price, boolean takeOut) {
+	public Food(String name, int price) {
 		this.name = name;
 		this.price = price;
-		this.takeOut = takeOut;
 	}
 
 	public String getName() {
@@ -29,17 +27,10 @@ public class Food {
 		this.price = price;
 	}
 
-	public boolean isTakeOut() {
-		return takeOut;
-	}
-
-	public void setTakeOut(boolean takeOut) {
-		this.takeOut = takeOut;
-	}
 
 	@Override
 	public String toString() {
-		return "Food [name=" + name + ", price=" + price + ", takeOut=" + takeOut + "]";
+		return "Food [name=" + name + ", price=" + price+ "]";
 	}
 	
 	
