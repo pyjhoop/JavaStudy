@@ -10,31 +10,35 @@ import java.util.Scanner;
 import java.util.Set;
 
 import com.practice.controller.Cafe;
+import com.practice.model.vo.Employee;
 
 public class CafeRun {
 
 	public static void main(String[] args) {
+		
+		print();
+		
+		
+	}
+	
+	public static void print() {
 		Cafe cf = new Cafe();
+		Employee e = new Employee();
+		
 		Scanner sc = new Scanner(System.in);
 		
+		Properties prop = e.fileRead();
 		
-		Properties prop = new Properties();
+		System.out.print("출근자의 이름을 입력하시오 : ");
+		String eName = sc.nextLine();
 		
-//		prop.setProperty("모모씨", "10000");
-//		prop.setProperty("사과씨", "20000");
-//		prop.setProperty("앵두씨", "40000");
 		
-		try {
-			prop.load(new FileInputStream("employee.properties"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		System.out.println(prop.get(eName)+"출근 완료!!!");
+		System.out.println("======카페 오픈======");
+		
+		for(int i = 0; i<5; i++) {
+			System.out.println((1+i)+"번째 손님");
 		}
-		System.out.println("출근 프로그램 작동!!");
-		System.out.print("직원의 이름을 입력하세요 : ");
-		String name = sc.nextLine();
-		
 		
 	}
 
