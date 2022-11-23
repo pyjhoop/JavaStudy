@@ -44,7 +44,7 @@ public class Cafe {
 	}
 	
 	public void addOrderList(Food f) {
-		
+		orderList.add(f);
 	}
 	
 	public int totalPrice() {
@@ -63,4 +63,7 @@ public class Cafe {
 		return str;
 	}
 	
+	public ArrayList<Food> selectOrderList(){
+		return orderList;
+	}
 }

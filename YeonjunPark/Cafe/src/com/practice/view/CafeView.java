@@ -44,22 +44,22 @@ public class CafeView {
 		System.out.println("\n=== 카페 오픈 손님받습니다 ===");
 		int cusNo = 1;
 		char size =' ';
+		int pay = 0;
 		String temperature = " ";
 		ArrayList<Food> orderList = new ArrayList<Food>();
 		
 		System.out.println(cusNo+"번째 손님 들어오십니다.\n");
 		System.out.println("손님 무엇을 주문하시겠습니까? ");
 		
+		printMenu(); //전체메뉴 출력 메서드
+		
 		ArrayList<Food> foods = c.selecFood();
-		for(int i = 0; i< foods.size(); i++) {
-			System.out.println((i+1)+". "+foods.get(i).getName()+" : "+foods.get(i).getPrice());
-		}
 		while(true) {
 			System.out.print(">> 주문번호 입력 : ");
 			int menuNo = sc.nextInt();
 			sc.nextLine();
 			
-			if(foods.get(menuNo) instanceof Beverage) {
+			if(foods.get(menuNo-1) instanceof Beverage) {
 				System.out.print("음료의 사이즈는 어떻게 드릴까요? (R/T) : ");
 				size = sc.nextLine().toUpperCase().charAt(0);
 				System.out.print("Hot and ice 둘중에 하나 선택해주세요 (Hot/Ice): ");
@@ -78,9 +78,35 @@ public class CafeView {
 			}
 		}
 		
+		printOrderList(); // 주문한 음료 및 디저트 출력 메서드
+		
+		System.out.print("주문한 것과 동일합니까? (y/n) : ");
+		char select = sc.nextLine().toUpperCase().charAt(0);
+		if(select == 'Y') {
+			int total = c.totalPrice();
+			System.out.print("총금액 : "+ total);
+			System.out.print("지급하실 금액을 입력해주세요 : ");
+			pay = sc.nextInt();
+		}
 		printBill();
 		
-		
+	}
+	
+	public void printMenu() {
+		ArrayList<Food> list = c.selecFood();
+		for(int i = 0; i< list.size(); i++) {
+			System.out.println((i+1)+". "+list.get(i).getName()+" : "+list.get(i).getPrice());
+		}
+	}
+	
+	
+	
+	public void printOrderList() {
+		ArrayList<Food> list = c.selectOrderList();
+		System.out.print("\n=== 주문하신 음료 및 디저트 ===");
+		for(int i = 0; i< list.size(); i++) {
+			System.out.println(list.get(i).getName());
+		}
 	}
 	
 	
@@ -91,6 +117,7 @@ public class CafeView {
 		System.out.println(c.totalPrice());
 		
 	}
+	
 	
 	
 }
