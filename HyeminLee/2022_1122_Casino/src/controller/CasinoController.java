@@ -7,6 +7,8 @@ public class CasinoController {
 	
 	private int[] arr = new int[5];
 	private ArrayList list = new ArrayList(4);
+
+	
 	
 
 	

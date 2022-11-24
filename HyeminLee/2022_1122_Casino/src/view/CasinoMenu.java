@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.CasinoController;
+import model.vo.Casino;
 
 /**
  * @author 이혜민
@@ -14,6 +15,7 @@ public class CasinoMenu {
 	Scanner sc = new Scanner(System.in);
 
 	CasinoController cc = new CasinoController();
+	Casino cs = new Casino();
 	
 
 
@@ -34,7 +36,7 @@ public class CasinoMenu {
 			switch (answer) {
 			case 1:
 				playCasino();
-				break;
+				return;
 			case 2:
 				System.out.println(" 아..아쉽네요..기회가 된다면 저희 카지노에 다시 방문해주세요^^");
 				return;
@@ -67,83 +69,33 @@ public class CasinoMenu {
 		System.out.println(" 정답일시 그자리에서 상금 100만원 아닐시에는 기회를 2번 더 드립니다");
 		System.out.println("\n====================================================");
 		
-		if(count==3) {
-			flag=false;
-			correct(); // 정답공개
-			System.out.println(" 총 3번의 기회를 다 실패했습니다!");
-			System.out.println(" 카지노 설거지 당첨 축하드립니다 ^^");
-		}
+//		if(count==3) {
+//			flag=false;
+//			correct(); // 정답공개
+//			System.out.println(" 총 3번의 기회를 다 실패했습니다!");
+//			System.out.println(" 카지노 설거지 당첨 축하드립니다 ^^");
+//		}
 		
-		while(true==flag) {
+		while(flag) {
 			
-			
-		System.out.println((count+1)+"번째 게임 시작하겠습니다");
-		
-
 		System.out.println();
+		
+		String[] sArr = cs.getsArr();
+		
+		for(int j = 0; j<sArr.length; j++) {
+			System.out.println((count+1)+"번째 게임 시작하겠습니다");
+			for(int i=0; i<3; i++) {
+				System.out.print("기회"+(i+1)+ " "+ sArr[j]+ "번째 자리 숫자 : ");
+				int num1 = sc.nextInt();
+				int cont3 = num1(num1);
+				if(cont3==num1) {
+						System.out.println("정답입니다!");
+						break;
+				}
+			}
+			System.out.println("-------------------------------------------");
+		}
 
-		
-		for(int i=0; i<3; i++) {
-			System.out.print("기회"+(i+1)+" 세번째 자리 숫자 : ");
-			int num1 = sc.nextInt();
-			int cont3 = num1(num1);
-			if(cont3==num1) {
-					System.out.println("정답입니다!");
-					break;
-			}
-		}
-		
-		
-		
-		
-		
-		System.out.println("-------------------------------------------");
-		
-		for(int i=0; i<3; i++) {
-			System.out.print("기회"+(i+1)+" 두번째 자리 숫자 : ");
-			int num2 = sc.nextInt();
-			int cont2 = num2(num2);
-			if(cont2==num2) {
-					System.out.println("정답입니다!");
-					break;
-			}
-		}
-		
-		
-		System.out.println("-------------------------------------------");
-		
-		for(int i=0; i<3; i++) {
-			System.out.print("기회"+(i+1)+" 세번째 자리 숫자 : ");
-			int num3 = sc.nextInt();
-			int cont3 = num3(num3);
-			if(cont3==num3) {
-					System.out.println("정답입니다!");
-					break;
-			}
-		}
-		
-		System.out.println("-------------------------------------------");	
-		for(int i=0; i<3; i++) {
-			System.out.print("기회"+(i+1)+" 네번째 자리 숫자 : ");
-			int num4 = sc.nextInt();
-			int cont4 = num4(num4);
-			if(cont4==num4) {
-					System.out.println("정답입니다!");
-					break;
-			}
-		}
-		System.out.println("-------------------------------------------");	
-		
-		for(int i=0; i<3; i++) {
-			System.out.print("기회"+(i+1)+" 다섯번째 자리 숫자 : ");
-			int num5 = sc.nextInt();
-			int cont5 = num5(num5);
-			if(cont5==num5) {
-					System.out.println("정답입니다!");
-					break;
-			}
-		}
-		
 		
 			
 		System.out.println("=============== 최종 번호 5개 ==================");
@@ -171,12 +123,17 @@ public class CasinoMenu {
 			System.out.println("다시 도전 가즈즈즈왕아아ㅏ");
 			System.out.println("======="+(count+1)+"번째 기회 실패 ========");
 			System.out.println();
+			count++;
 		}
 		
 		
 		
-		
-		count++;
+		if(count==3) {
+			correct(); // 정답공개
+			System.out.println(" 총 3번의 기회를 다 실패했습니다!");
+			System.out.println(" 카지노 설거지 당첨 축하드립니다 ^^");
+			return;
+		}
 		
 		
 		} // while
