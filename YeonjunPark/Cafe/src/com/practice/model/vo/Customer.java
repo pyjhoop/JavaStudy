@@ -4,15 +4,13 @@ public class Customer {
 	private String name;
 	private String phoneNumber;
 	private int point;
-	private boolean takeOut;
 	
 	public Customer() {}
 
-	public Customer(String name, String phoneNumber, int point, boolean takeOut) {
+	public Customer(String name, String phoneNumber, int point) {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.point = point;
-		this.takeOut = takeOut;
 	}
 
 	public String getName() {
@@ -39,17 +37,10 @@ public class Customer {
 		this.point = point;
 	}
 
-	public boolean isTakeOut() {
-		return takeOut;
-	}
-
-	public void setTakeOut(boolean takeOut) {
-		this.takeOut = takeOut;
-	}
 
 	@Override
 	public String toString() {
-		return "Customer [name=" + name + ", phoneNumber=" + phoneNumber + ", point=" + point + ", takeOut=" + takeOut
+		return "Customer [name=" + name + ", phoneNumber=" + phoneNumber + ", point=" + point 
 				+ "]";
 	}
 	

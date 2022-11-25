@@ -3,6 +3,7 @@ package com.practice.controller;
 import java.util.ArrayList;
 
 import com.practice.model.vo.Beverage;
+import com.practice.model.vo.Customer;
 import com.practice.model.vo.Dessert;
 import com.practice.model.vo.Food;
 
@@ -11,6 +12,7 @@ public class Cafe {
 	ArrayList<String> empList = new ArrayList<String>();
 	ArrayList<Food> foods = new ArrayList<Food>();
 	ArrayList<Food> orderList = new ArrayList<Food>();
+	ArrayList<Customer> cus = new ArrayList<Customer>();
 	
 	{
 		empList.add("모모씨");
@@ -22,6 +24,7 @@ public class Cafe {
 		foods.add(new Dessert("레드벨벳", 7500));
 		foods.add(new Dessert("순우유 조각케이크", 8000));
 		foods.add(new Dessert("마카롱", 3500));
+		cus.add(new Customer("박연준", "01052066319", 1000));
 	}
 	
 	
@@ -61,6 +64,19 @@ public class Cafe {
 			str += (orderList.get(i).getName() + " : "+orderList.get(i).getPrice()+"\n");
 		}
 		return str;
+	}
+	
+	public ArrayList<Customer> getCusLIst() {
+		return cus;
+	}
+	
+	public void addCus(Customer cs) {
+		cus.add(cs);
+	}
+	
+	
+	public void clearOrder() {
+		orderList.clear();
 	}
 	
 	public ArrayList<Food> selectOrderList(){
