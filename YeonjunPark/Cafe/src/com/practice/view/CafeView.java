@@ -50,7 +50,6 @@ public class CafeView {
 		
 		System.out.println(cusNo+"번째 손님 들어오십니다.\n");
 		System.out.println("손님 무엇을 주문하시겠습니까? ");
-		
 		printMenu(); //전체메뉴 출력 메서드
 		
 		ArrayList<Food> foods = c.selecFood();
