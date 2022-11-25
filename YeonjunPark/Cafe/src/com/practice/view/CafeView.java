@@ -16,54 +16,90 @@ public class CafeView {
 	/**
 	 * 1. 카페 오픈시 포스기에 근무자의 이름을 입력하고 ~~출근
 	 */
-	public void logingForce() {
+	public void loginForce() {
+		System.out.println("\n=== OK포스기 로그인 화면 ===");
 		while(true) {
-			System.out.println("\n=== OK포스기 로그인 화면 ===");
-			System.out.print("근무자의 이름을 입력하세요 : ");
-			String name = sc.nextLine();
-			int openCafe = c.logingForce(name);
+			System.out.println("1. 기존근무자   2. 새로운 근무자");
+			System.out.print(">> 번호 입력 : ");
+			int num = sc.nextInt();
+			sc.nextLine();
 			
-			if(openCafe == 1) {
-				System.out.println(name+"님 열일 해주세여!!!");
+			if(num == 1) {
+				System.out.print(">> 이름 입력 : ");
+				String name = sc.nextLine();
+				int openCafe = c.loginForce(name);
+				if(openCafe == 1) {
+					System.out.println(name+"님 열일 해주세여!!!");
+					break;
+				}else {
+					System.out.println("잘못입력했습니다. 다시 입력해주세요!!");
+					continue;
+				}
+			} else if(num == 2) {
+				System.out.print(">> 새로운 근무자 이름 입력 : ");
+				String newName = sc.nextLine();
+				c.addEmp(newName);
+				System.out.println(newName+"환영합니다. 열일해주세요!");
 				break;
 			}else {
-				System.out.print("새로운 근무자를 추가하겠습니까?(y/n) : ");
-				char ch = sc.nextLine().toUpperCase().charAt(0);
-				if(ch == 'Y') {
-					System.out.print("이름을 입력해주세요 : ");
-					String name1 = sc.nextLine();
-					c.addEmp(name1);
-					System.out.println(name1+"님 근무자로 추가되었습니다!");
-					System.out.println("다시 로그인을 해주세요!!!");
-				}
+				System.out.println("잘못 입력하셨습니다. 다시입력해주세요");
+				continue;
 			}
 		}
 	}
-	
+			
+			
+			
 	public void openCafe() {
-		System.out.println("\n=== 카페 오픈 손님받습니다 ===");
+		System.out.println("\n=== 카페 오픈했습니다. 손님받습니다~ ===");
 		int cusNo = 1;
-		char size =' ';
+		String size ="";
 		int pay = 0;
-		String temperature = " ";
+		String temperature = "";
 		ArrayList<Food> orderList = new ArrayList<Food>();
 		
 		System.out.println(cusNo+"번째 손님 들어오십니다.\n");
 		System.out.println("손님 무엇을 주문하시겠습니까? ");
-		printMenu(); //전체메뉴 출력 메서드
 		
-		ArrayList<Food> foods = c.selecFood();
 		while(true) {
+			ArrayList<Food> foods = c.selecFood();
+			System.out.println("========== 전 메뉴 ===========");
+			printMenu(); //전체메뉴 출력 메서드
 			System.out.print(">> 주문번호 입력 : ");
 			int menuNo = sc.nextInt();
 			sc.nextLine();
 			
 			if(foods.get(menuNo-1) instanceof Beverage) {
-				System.out.print("음료의 사이즈는 어떻게 드릴까요? (R/T) : ");
-				size = sc.nextLine().toUpperCase().charAt(0);
-				System.out.print("Hot and ice 둘중에 하나 선택해주세요 (Hot/Ice): ");
-				temperature = sc.nextLine().toUpperCase();
-				c.addOrderList(new Beverage(foods.get(menuNo-1).getName(), foods.get(menuNo-1).getPrice(), size, temperature));
+				System.out.println("\n사이즈는 무엇으로 하시겠습니까?");
+				System.out.println("1. Reguler   2. Tall(100원 추가)");
+				System.out.print(">> 번호 입력 : ");
+				int selec = sc.nextInt();
+				sc.nextLine();
+				
+				switch(selec){
+				case 1:
+					size = "Reguler"; break;
+				case 2:
+					size = "Tall"; 
+				}
+				
+				
+				System.out.println("1. Hot   2. Ice 둘중 하나 선택해주세요");
+				System.out.print(">> 번호 입력 : ");
+				int selec1 = sc.nextInt();
+				sc.nextLine();
+				
+				switch(selec1) {
+				case 1: temperature = "Hot"; break;
+				case 2: temperature = "Ice";
+				
+				}
+				
+				if(selec == 1) {
+					c.addOrderList(new Beverage(foods.get(menuNo-1).getName(), foods.get(menuNo-1).getPrice(), size, temperature));
+				}else {
+					c.addOrderList(new Beverage(foods.get(menuNo-1).getName(), foods.get(menuNo-1).getPrice()+1000, size, temperature));
+					}
 			}else {
 				c.addOrderList(new Dessert(foods.get(menuNo-1).getName(), foods.get(menuNo-1).getPrice()));
 			}
@@ -83,11 +119,11 @@ public class CafeView {
 		char select = sc.nextLine().toUpperCase().charAt(0);
 		if(select == 'Y') {
 			int total = c.totalPrice();
-			System.out.print("총금액 : "+ total);
-			System.out.print("지급하실 금액을 입력해주세요 : ");
+			System.out.println("총금액 : "+ total);
+			System.out.print(">> 지급하실 금액을 입력해주세요 : ");
 			pay = sc.nextInt();
 		}
-		printBill();
+		printBill(pay);
 		
 	}
 	
@@ -102,17 +138,20 @@ public class CafeView {
 	
 	public void printOrderList() {
 		ArrayList<Food> list = c.selectOrderList();
-		System.out.print("\n=== 주문하신 음료 및 디저트 ===");
+		System.out.println("\n=== 주문하신 음료 및 디저트 ===");
 		for(int i = 0; i< list.size(); i++) {
 			System.out.println(list.get(i).getName());
 		}
 	}
 	
 	
-	public void printBill() {
+	public void printBill(int pay) {
 		System.out.println("\n=== 계산서 ===");
-		System.out.println("계산 도와드리겠습니다.");
 		System.out.println("현재 주문하신 음식");
+		ArrayList<Food> list = c.selectOrderList();
+		for(int i = 0; i< list.size(); i++) {
+			System.out.printf("%-9s  : %d\n",list.get(i).getName(),list.get(i).getPrice());
+		}
 		System.out.println(c.totalPrice());
 		
 	}

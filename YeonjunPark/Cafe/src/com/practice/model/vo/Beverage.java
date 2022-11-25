@@ -1,7 +1,7 @@
 package com.practice.model.vo;
 
 public class Beverage extends Food{
-	private char size;
+	private String size;
 	private String temperature;
 	
 	public Beverage() {}
@@ -13,7 +13,7 @@ public class Beverage extends Food{
 	
 	
 
-	public Beverage(String name, int price, char size, String temperature) {
+	public Beverage(String name, int price, String size, String temperature) {
 		super(name, price);
 		this.size = size;
 		this.temperature = temperature;

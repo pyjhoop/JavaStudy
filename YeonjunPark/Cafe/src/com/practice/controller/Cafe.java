@@ -25,7 +25,7 @@ public class Cafe {
 	}
 	
 	
-	public int logingForce(String name) {
+	public int loginForce(String name) {
 		int status = 0;
 		for(int i = 0; i< empList.size(); i++) {
 			if(empList.get(i).equals(name)) {

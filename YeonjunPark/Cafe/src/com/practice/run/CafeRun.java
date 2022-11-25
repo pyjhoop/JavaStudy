@@ -7,7 +7,7 @@ public class CafeRun {
 	public static void main(String[] args) {
 		CafeView cv = new CafeView();
 		
-		cv.logingForce();
+		cv.loginForce();
 		
 		cv.openCafe();
 		
