@@ -30,7 +30,13 @@ public class Coffee extends Dessert {
 	}
 	
 	
-	
+public int takeout(int pulePrice) {
+		
+		pulePrice = super.getPrice()+1000;
+		
+		
+		return pulePrice;
+	}
 	
 	
 

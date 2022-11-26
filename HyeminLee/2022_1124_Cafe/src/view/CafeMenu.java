@@ -6,6 +6,7 @@ import java.util.Scanner;
 import controller.CoffeeController;
 import model.vo.Coffee;
 import model.vo.Dessert;
+import model.vo.Person;
 
 public class CafeMenu {
 	
@@ -57,8 +58,8 @@ public class CafeMenu {
 		// 그럼 여기 일하는 직원 출력도 arraylist해서 추가하면 
 		// 한바퀴 돌았을때 그분도 추가되게 만들어야하지않을까?
 		
-	
-		System.out.println("등록되지 않은 새로운 직원분이면 99을 입력해주세요");
+		System.out.println("근무자 전체 조회는 88번 입력해주세요");
+		System.out.println("등록되지 않은 새로운 직원분이면 99번 입력해주세요");
 		
 		System.out.println(cc.selectPerson());
 		
@@ -69,9 +70,23 @@ public class CafeMenu {
 		
 		if(num==99) {
 			insertPerson();
+		}else if(num==88) {
+			selectPerson();
 		}
 		
-		System.out.println("안녕하세요  " + cc.todayWorker(num)+"님");
+		/*
+		 * 
+		 * 여기 오류남 등록은 잘되는데 
+		 * num이 밑에 todayworker만나면서 오류뜸;; 고치기
+		 * 
+		 * 추가했는데도 인덱스 범위가 벗어났나??
+		 * IndexOutOfBoundsException 발생
+		 * 
+		 * */
+		
+
+		
+		System.out.println("안녕하세요  " + cc.todayWorker(num)+"님 :-)");
 		System.out.println("근무 시작하겠습니다 주문 키오스크 작동합니다");
 		System.out.println("==================================================");
 		
@@ -124,13 +139,11 @@ public class CafeMenu {
 		// size,temper 매개변수로 받고 음료 가격 출력하는 메소드 cc구성+ 추가주문하면 누적합?
 		
 		
-		System.out.println("1. 매장에서 섭취  2. 포장 (주문시 1000원 추가)");
+		System.out.println("\n1. 매장에서 섭취  2. 포장 (주문시 1000원 추가)");
 		System.out.print("어떻게 도와드릴까요? : ");
 		int takeout = sc.nextInt();
 		
-		if(takeout==1) {
-			continue;
-		}else if(takeout==2) {
+		if(takeout==2) {
 			
 		}
 		
@@ -248,7 +261,7 @@ public class CafeMenu {
 		sc.nextLine();
 		System.out.println("----- 새로운 근무자 추가 -------");
 		
-		System.out.println("현재 1~3번 근무자는 있습니다");
+		System.out.println("현재 0~2번 근무자는 있습니다");
 		System.out.print("근무자 번호 입력해주세요 : ");
 		int num = sc.nextInt();
 		sc.nextLine();
@@ -276,6 +289,15 @@ public class CafeMenu {
 	}
 	
 	
+	public void selectPerson() {
+		ArrayList<Person> list =  cc.selectPerson();
+		
+		for(Person p : list) {
+			System.out.println(p);
+		}
+		
+		
+	}
 	
 	
 	

@@ -62,10 +62,13 @@ public class CoffeeController {
 	// 오늘 근무하는 사람 조회
 	public String todayWorker(int num){
 		
-		String today = perList.get(num).getName();
+		ArrayList<Person> list = selectPerson();
+		
+		String today = list.get(num).getName();
 		
 		return today;
 	}
+	
 	
 	
 	
