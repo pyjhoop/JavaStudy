@@ -6,10 +6,21 @@ public class Bank {
 	private String id;
 	private String pwd;
 	private int balance;
-	public static final int SIZE = 5;
+//	public static final int SIZE = 5;
 	
 	public Bank() {}
 
+	
+	public Bank(int balance) {
+		this.balance=balance;
+	}
+	
+	
+	public Bank(String accountNumber,int balance) {
+		this.accountNumber = accountNumber;
+		this.balance = balance;
+	}
+	
 	public Bank(String accountNumber, String name, String id,String pwd, int balance) {
 		this.accountNumber = accountNumber;
 		this.id = id;
