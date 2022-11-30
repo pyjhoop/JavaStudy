@@ -29,6 +29,17 @@ public class Bank {
 		return num;
 	}
 	
+	//아이디로 자신계정 반환메서드
+	public Account findAccount(String id) {
+		Account a = new Account();
+		for(int i = 0; i<aList.size(); i++) {
+			if(id.equals(aList.get(i).getId())) {
+				a = aList.get(i);
+			}
+			}
+		return a;
+	}
+	
 	//아이디로 계정 삭제하는 메서드
 	public void deleteAccount(String id) {
 		for(int i = 0; i< aList.size(); i++) {
@@ -38,4 +49,13 @@ public class Bank {
 		}
 	}
 	
+	//신규계정 추가하는 메서드
+	public void addNewMember(String name, String id, String pwd, String account, int b) {
+		aList.add(new Account(account, name, id, pwd, b));
+	}
+	
+	//내 계좌 조회하기
+	public Account selectMyAccount(String id) {
+		return findAccount(id);
+	}
 }

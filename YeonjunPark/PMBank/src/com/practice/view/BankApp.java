@@ -11,14 +11,17 @@ public class BankApp {
 	Bank b = new Bank();
 	
 	public void printView() {
+		Account a = new Account();
 		int selectMember = selectMember();
 		if(selectMember == 1) {
-			 existingMember();
-			//기존회원일 시 아이디와 비밀번호를 입력받아서 비교후 로그인 성공!
-			//한 아이디에 비번만 실패하면 아이디 삭제당함.
+			a = existingMember();
+				//기존회원일 시 아이디와 비밀번호를 입력받아서 비교후 로그인 성공!
+				//한 아이디에 비번만 실패하면 아이디 삭제당함.
 		}else if(selectMember == 2) {
-			//계좌번호, 아이디, 비번, 잔금 입력받아서 객체 생성
+				//계좌번호, 아이디, 비번, 잔금 입력받아서 객체 생성
+			newMember();
 		}
+		mainMenu(a);
 		
 		
 	}//printView close
@@ -54,7 +57,7 @@ public class BankApp {
 	/**
 	 * 기존 회원일 시 아이디와 비번 비교 후 비번 3번 틀릴시 아이디 삭제
 	 */
-	public void existingMember() {
+	public Account existingMember() {
 		int cnt = 0;
 		int num = 0;
 		String id = "";
@@ -80,6 +83,7 @@ public class BankApp {
 				continue;
 			}else {
 				System.out.println("로그인 성공!!!");
+				acc = b.findAccount(id);
 				break;
 			}
 		}
@@ -88,10 +92,71 @@ public class BankApp {
 			b.deleteAccount(id);
 			System.out.println("PMBank 보안사항에 따라 아이디가 삭제됩니다!");
 		}
+		return acc;
+	}
+	
+	/**
+	 * 신규회원시 회원가입과정.
+	 */
+	public Account newMember() {
+		//계좌번호, 아이디, 비번, 잔금 입력받아서 객체 생성
+		System.out.println("=======================");
+		System.out.println("회원가입을 진행하겠습니다");
+		System.out.print("성함 : ");
+		String name = sc.nextLine();
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String pwd = sc.nextLine();
+		System.out.print("계좌번호 : ");
+		String accountNumber = sc.nextLine();
 		
+		b.addNewMember(name, id, pwd, accountNumber, 0);
+		
+		System.out.println(name+"님 PMBank에 오신것을 환영합니다.");
+		return b.findAccount(id);
 		
 	}
 	
+	public void mainMenu(Account acc) {
+		while(true) {
+			Account a = b.selectMyAccount(acc.getId());
+			
+			System.out.println("=======================");
+			System.out.println("원하시는 기능을 선택하시오!");
+			System.out.println("1. 내계좌 조회하기");
+			System.out.println("2. 계좌이체하기");
+			System.out.println("3. 입금");
+			System.out.println("4. 출금");
+			System.out.print("숫자입력 : ");
+			int num = sc.nextInt();
+			sc.nextLine();
+			switch(num) {
+			case 1: 
+				selectMyAccount(a);
+				break;
+			case 2:
+				sendMoney(a);
+			}
+			
+		}
+	}
+	
+	public void selectMyAccount(Account a) {
+		System.out.println("=======================\n");
+		System.out.println(a.getName()+"님의 계좌번호 : "+a.getAccountNumber());
+		System.out.println(a.getName()+"님의 잔액 : "+ a.getBalance());
+		
+	}
+	
+	public void sendMoney(Account a) {
+		System.out.print("이체하고 싶으신 계좌의 번호를 입력해주세요:");
+		String account = sc.nextLine();
+		System.out.print("이체를 원하시는 금액을 입력해 주세요 : ");
+		int money = sc.nextInt();
+		sc.nextLine();
+		
+	}
 	
 	
 	
