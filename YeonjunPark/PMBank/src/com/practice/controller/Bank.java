@@ -1,5 +1,7 @@
 package com.practice.controller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import com.practice.model.vo.Account;
@@ -52,10 +54,23 @@ public class Bank {
 	//신규계정 추가하는 메서드
 	public void addNewMember(String name, String id, String pwd, String account, int b) {
 		aList.add(new Account(account, name, id, pwd, b));
+		
+		
 	}
 	
 	//내 계좌 조회하기
 	public Account selectMyAccount(String id) {
 		return findAccount(id);
+	}
+	
+	//계좌번호를 통해 계좌를 찾는 메서드
+	public Account selectAccount(String account) {
+		Account a1 = null;
+		for(Account a: aList) {
+			if(a.getAccountNumber().equals(account)) {
+				a1 = a;
+			}
+		}
+		return a1;
 	}
 }

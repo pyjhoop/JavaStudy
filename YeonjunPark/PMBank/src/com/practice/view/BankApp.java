@@ -118,6 +118,9 @@ public class BankApp {
 		
 	}
 	
+	/**
+	 * 은행의 전체적인 업무를 표현해줌
+	 */
 	public void mainMenu(Account acc) {
 		while(true) {
 			Account a = b.selectMyAccount(acc.getId());
@@ -128,7 +131,7 @@ public class BankApp {
 			System.out.println("2. 계좌이체하기");
 			System.out.println("3. 입금");
 			System.out.println("4. 출금");
-			System.out.print("숫자입력 : ");
+			System.out.print(">> 숫자입력 : ");
 			int num = sc.nextInt();
 			sc.nextLine();
 			switch(num) {
@@ -137,25 +140,103 @@ public class BankApp {
 				break;
 			case 2:
 				sendMoney(a);
+				break;
+			case 3:
+				deposit(a);
+				break;
+			case 4:
+				withdraw(a);
 			}
 			
 		}
 	}
 	
 	public void selectMyAccount(Account a) {
-		System.out.println("=======================\n");
+		System.out.println("=======================");
 		System.out.println(a.getName()+"님의 계좌번호 : "+a.getAccountNumber());
-		System.out.println(a.getName()+"님의 잔액 : "+ a.getBalance());
+		System.out.println(a.getName()+"님의 잔액 : "+ a.getBalance()+"\n");
 		
 	}
 	
 	public void sendMoney(Account a) {
-		System.out.print("이체하고 싶으신 계좌의 번호를 입력해주세요:");
-		String account = sc.nextLine();
-		System.out.print("이체를 원하시는 금액을 입력해 주세요 : ");
+		while(true) {
+			System.out.println("=======================");
+			System.out.print("이체하고 싶으신 계좌의 번호를 입력해주세요:");
+			String account = sc.nextLine();
+			int money = 0;
+			
+			while(true) {
+				System.out.print("이체를 원하시는 금액을 입력해 주세요 : ");
+				try {
+					money = sc.nextInt();
+					sc.nextLine();
+				} catch (InputMismatchException e) {
+					sc.nextLine();
+					System.out.println("숫자를 입력해 주세요!!!");
+					continue;
+				}
+				if(money <0) {
+					System.out.println("제대로된 금액(양수)를 입력해 주세요!!!\n");
+					continue;
+				}
+				if(a.getBalance()<money) {
+					System.out.println("현재 잔고보다 적은 금액을 입력해 주세요!!!\n");
+					continue;
+				}
+				break;
+				}
+				
+			
+			a.setBalance(a.getBalance()-money);
+			// 계좌번호를 통해 계좌를 찾는 메서드.
+			Account to = b.selectAccount(account);
+			if(to == null) {
+				System.out.println("존재하지 않는 계좌번호 입니다. 다시 입력해주세요!!!");
+				continue;
+			}
+			System.out.println("===계좌이체 완료!!==");
+			System.out.println(a.getName()+"님의 잔액은 : "+a.getBalance());
+			System.out.println("계좌이체 금액 : "+money);
+			break;
+		}
+		
+	}
+	
+	/**
+	 * 입금기능을 담당하는 메서드
+	 */
+	public void deposit(Account a) {
+		System.out.println("=======================");
+		System.out.print("입금하실 금액을 입력해 주세요 : ");
 		int money = sc.nextInt();
 		sc.nextLine();
 		
+		System.out.println(money+"원 입금 완료!!!");
+		a.setBalance(a.getBalance()+money);
+		System.out.println("현재 계좌의 잔고 : "+a.getBalance());
+	}
+	
+	/**
+	 * 출금을 담당하는 메서드
+	 */
+	public void withdraw(Account a) {
+		
+		while(true) {
+			System.out.println("=======================");
+			System.out.print("출금하실 금액을 입력해 주세요 : ");
+			int money = sc.nextInt();
+			sc.nextLine();
+			
+			if(money > a.getBalance()) {
+				System.out.println("잔고보다 출금 금액이 큽니다. 다시 입력해 주세요!!!");
+				continue;
+			}
+			System.out.println(money+"원 출금 완료!!!");
+			a.setBalance(a.getBalance()-money);
+			System.out.println("현재 계좌의 잔고 : "+a.getBalance());
+			break;
+			
+		}
 	}
 	
 	
