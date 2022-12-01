@@ -28,7 +28,12 @@ public class BankMenu {
 	
 	case 1 : 
 	// 기존회원시
-	System.out.println("---- PM 은행 로그인 ----");	
+		
+	
+	int ber=3;
+	for(int i=0; i<3; i++) {
+		
+	System.out.println("\n---- PM 은행 로그인 ----");	
 	System.out.println("로그인 시도 3번틀릴시 아이디 삭제됩니다");	
 	
 	System.out.print("아이디 : ");
@@ -36,12 +41,12 @@ public class BankMenu {
 	
 	System.out.print("비밀번호 : ");	
 	String pw = sc.nextLine();
-	
-	// if문?? 아이디가 틀릴시 아이디 틀렸다고 비밀번호가 틀리면 비번틀림
-	// 몇번 시도라고 알려줄수있으면 좋겠당~ 
-	// 그리고 통과할때까지 아이디 입력구간 반복 3번틀려서 아이디 삭제되면
-	// 처음부터 돌아가는거 for문 가능??
+	--ber;
+		idPw(id, pw, ber);
+	// 3번 돌아가는건 ok / 로그인 시도 누군지 알고 삭제할꺼야??
+	// 그리고 idPw 빠져나와서 바로 은행업무 안내 메소드 타는거 우째 막을꺼얌
 		
+	}
 	break;	
 		
 		
@@ -139,6 +144,32 @@ public class BankMenu {
 			
 		}
 	
+	
+
+	public void idPw(String idInput,String pwInput,int num) {
+		
+		ArrayList<Bank> list = bc.selectAccount();
+		
+		for(int i=0; i<list.size(); i++) {
+			if(idInput.equals(list.get(i).getId())) {
+				System.out.println("로그인 성공했습니다");
+				break;
+			}
+		} 
+		
+			System.out.println("\n로그인 실패했습니다");
+			if (num == 0) {
+				System.out.println("ID 삭제되었습니다");
+				System.out.println("신규 가입으로 다시 시도해주세요");
+				//근데 로그인 시도한사람이 누군지알고 삭제해...????
+				return;
+			}
+			System.out.println(num+"번 기회 남았습니다");
+		
+		
+		
+	}
+
 	
 	
 	
