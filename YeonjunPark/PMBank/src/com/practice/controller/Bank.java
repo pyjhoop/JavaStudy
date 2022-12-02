@@ -1,7 +1,10 @@
 package com.practice.controller;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileOutputStream;import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import com.practice.model.vo.Account;
@@ -16,6 +19,13 @@ public class Bank {
 	
 	//기존회원 아이디 및 비번 비교
 	public int searchAccount(String id, String pwd) {
+		
+		ObjectInputStream ois = null;
+		try {
+			
+		}catch (Exception e) {
+		}
+		
 		int num = 0;//0은 비번 틀림
 		for(int i = 0; i<aList.size(); i++) {
 			if(id.equals(aList.get(i).getId())) {
@@ -51,9 +61,24 @@ public class Bank {
 		}
 	}
 	
-	//신규계정 추가하는 메서드
-	public void addNewMember(String name, String id, String pwd, String account, int b) {
-		aList.add(new Account(account, name, id, pwd, b));
+	//신규계정 추가하는 메서드 그다음에 파일에 쓰기
+	public void addNewMember(Account a) {
+		aList.add(a);
+		
+		ObjectOutputStream oos = null;
+		
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream("test.txt"));
+			oos.writeObject(aList);
+		}catch (Exception e) {
+		}finally {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 	}

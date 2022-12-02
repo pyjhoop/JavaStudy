@@ -19,7 +19,7 @@ public class BankApp {
 				//한 아이디에 비번만 실패하면 아이디 삭제당함.
 		}else if(selectMember == 2) {
 				//계좌번호, 아이디, 비번, 잔금 입력받아서 객체 생성
-			newMember();
+			a = newMember();
 		}
 		mainMenu(a);
 		
@@ -111,10 +111,14 @@ public class BankApp {
 		System.out.print("계좌번호 : ");
 		String accountNumber = sc.nextLine();
 		
-		b.addNewMember(name, id, pwd, accountNumber, 0);
+		Account b1 = new Account(accountNumber, name, id, pwd, 0);
 		
+		
+		
+		b.addNewMember(b1);
+		//추가를 해줬으니 파일을 읽어서 추가한 객체를 찾아주는 것도 해야함.
 		System.out.println(name+"님 PMBank에 오신것을 환영합니다.");
-		return b.findAccount(id);
+		return b1;
 		
 	}
 	
