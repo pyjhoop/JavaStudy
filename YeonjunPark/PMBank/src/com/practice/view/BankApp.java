@@ -130,7 +130,7 @@ public class BankApp {
 			Account a = b.selectMyAccount(acc.getId());
 			
 			System.out.println("=======================");
-			System.out.println("원하시는 기능을 선택하시오!");
+			System.out.println("원하시는 기능을 선택하시오!(종료하기 : 99)");
 			System.out.println("1. 내계좌 조회하기");
 			System.out.println("2. 계좌이체하기");
 			System.out.println("3. 입금");
@@ -150,6 +150,9 @@ public class BankApp {
 				break;
 			case 4:
 				withdraw(a);
+				break;
+			case 99:
+				return;
 			}
 			
 		}
@@ -218,6 +221,7 @@ public class BankApp {
 		System.out.println(money+"원 입금 완료!!!");
 		a.setBalance(a.getBalance()+money);
 		System.out.println("현재 계좌의 잔고 : "+a.getBalance());
+		b.fileSave(a);
 	}
 	
 	/**

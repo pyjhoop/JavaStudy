@@ -1,31 +1,29 @@
 package com.practice.controller;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import com.practice.model.vo.Account;
 import com.practice.view.BankApp;
 
+
 public class Bank {
 	ArrayList<Account> aList = new ArrayList<Account>();
-	{
-		aList.add(new Account("28770204133857", "박연준", "PYJ", "qwe123", 1000));
-		aList.add(new Account("123322123232", "황미자", "hmj",	"zxc123", 10000));
-	}
+	ObjectOutputStream oos = null;
+	ObjectInputStream ois = null;
+	
 	
 	//기존회원 아이디 및 비번 비교
 	public int searchAccount(String id, String pwd) {
-		
-		ObjectInputStream ois = null;
-		try {
-			
-		}catch (Exception e) {
-		}
-		
+		fileRead();
 		int num = 0;//0은 비번 틀림
 		for(int i = 0; i<aList.size(); i++) {
 			if(id.equals(aList.get(i).getId())) {
@@ -44,11 +42,11 @@ public class Bank {
 	//아이디로 자신계정 반환메서드
 	public Account findAccount(String id) {
 		Account a = new Account();
-		for(int i = 0; i<aList.size(); i++) {
-			if(id.equals(aList.get(i).getId())) {
+		for (int i = 0; i < aList.size(); i++) {
+			if (id.equals(aList.get(i).getId())) {
 				a = aList.get(i);
 			}
-			}
+		}
 		return a;
 	}
 	
@@ -64,12 +62,16 @@ public class Bank {
 	//신규계정 추가하는 메서드 그다음에 파일에 쓰기
 	public void addNewMember(Account a) {
 		aList.add(a);
+		fileSave(a);
+	}
+	
+	//파일에 저장
+	public void fileSave(Account a) {
 		
-		ObjectOutputStream oos = null;
 		
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream("test.txt"));
-			oos.writeObject(aList);
+			oos = new ObjectOutputStream(new FileOutputStream("test.txt", true));
+			oos.writeObject(a);
 		}catch (Exception e) {
 		}finally {
 			try {
@@ -79,8 +81,25 @@ public class Bank {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	//파일 읽어들이기
+	public void fileRead() {
 		
 		
+		try {
+			ois = new ObjectInputStream(new FileInputStream("test.txt"));
+			
+			aList = (ArrayList<Account>) ois.readObject();
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (EOFException e) {
+		}catch (StreamCorruptedException e) {
+		}catch (IOException e) {
+		} catch (ClassNotFoundException e) {
+		}
 	}
 	
 	//내 계좌 조회하기

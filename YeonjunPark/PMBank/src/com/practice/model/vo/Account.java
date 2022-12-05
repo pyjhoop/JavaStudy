@@ -1,6 +1,8 @@
 package com.practice.model.vo;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
 	private String accountNumber;
 	private String name;
 	private String id;
