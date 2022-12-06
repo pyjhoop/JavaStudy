@@ -30,24 +30,36 @@ public class BankMenu {
 	// 기존회원시
 		
 	
-	int ber=3;
-	for(int i=0; i<3; i++) {
+	
+	
+	
+	
+	while(true) {
+		
 		
 	System.out.println("\n---- PM 은행 로그인 ----");	
-	System.out.println("로그인 시도 3번틀릴시 아이디 삭제됩니다");	
+	
+	System.out.print("고객님 이름을 입력해주세요 : ");
+	String name = sc.nextLine();
+	
+	System.out.println("\n비밀번호 3번틀릴시 계정이 삭제됩니다");	
 	
 	System.out.print("아이디 : ");
 	String id = sc.nextLine();
 	
 	System.out.print("비밀번호 : ");	
 	String pw = sc.nextLine();
-	--ber;
-		idPw(id, pw, ber);
-	// 3번 돌아가는건 ok / 로그인 시도 누군지 알고 삭제할꺼야??
-	// 그리고 idPw 빠져나와서 바로 은행업무 안내 메소드 타는거 우째 막을꺼얌
-		
+	
+	int count = idPw(name, id, pw);
+	if(count==1) {
+		return;
 	}
+	
 	break;	
+	}
+		
+	
+	
 		
 		
 	case 2:	
@@ -146,29 +158,46 @@ public class BankMenu {
 	
 	
 
-	public void idPw(String idInput,String pwInput,int num) {
+	public int idPw(String name,String id,String pwd) {
 		
 		ArrayList<Bank> list = bc.selectAccount();
 		
+		int pwfail = 3;
+		
+			
+		
 		for(int i=0; i<list.size(); i++) {
-			if(idInput.equals(list.get(i).getId())) {
-				System.out.println("로그인 성공했습니다");
-				break;
+			int num = bc.login(id, pwd);
+			
+			if(num==0) {
+				
+				System.out.println("로그인 성공 ^0^");
+				
+			} else if(num==1) {
+				--pwfail;
+				System.out.println("\n로그인 실패했습니다");
+				System.out.println("비밀번호가 틀렸습니다");
+				System.out.println(pwfail+"번 기회 남았습니다");
+			} else if (num==2) {
+				System.out.println("\n로그인 실패했습니다");
+				System.out.println("아이디가 틀렸습니다");
 			}
-		} 
+			
+		} // for
 		
-			System.out.println("\n로그인 실패했습니다");
-			if (num == 0) {
-				System.out.println("ID 삭제되었습니다");
+			if (pwfail == 1) {
+				bc.delete(name, id);
+				System.out.println(name+"님의 계정이 비밀번호 3번 오류로 삭제되었습니다");
 				System.out.println("신규 가입으로 다시 시도해주세요");
-				//근데 로그인 시도한사람이 누군지알고 삭제해...????
-				return;
+				
+				
 			}
-			System.out.println(num+"번 기회 남았습니다");
+			return pwfail;
+		
+		}
 		
 		
-		
-	}
+	
 
 	
 	

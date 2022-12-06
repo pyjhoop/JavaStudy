@@ -50,15 +50,48 @@ public class BankController {
 	
 	// 로그인 시도 3번 실패시 계좌 삭제되는 메소드 만들기
 	
-	public void login(String id,String pw) {
-		
+	public int login(String id, String pw) {
+
 		// 아이디가 틀리면 아이디가 틀렸습니다
 		// 비번도 마찬가지
 		// 3번이상 틀리면 count로 숫자 세고 넘을시 리스트에서 remove?
+		int num = 0;
+
+		for (int i = 0; i < bList.size(); i++) {
+
+			if (id.equals(bList.get(i).getId())) {
+
+				if (pw.equals(bList.get(i).getPwd())) {
+					num = 0; // 아이디랑 비번까지 같아
+				} else {
+					num = 1; // 아이디는 같고 비번은 달라
+				}
+			} else {
+				num = 2; // 아이디부터 틀려
+				
+			}
+		} // for
+		return num;
+	}
+	
+	
+	
+	public void delete(String name,String id) {
+		
+		for(int i=0; i<bList.size(); i++) {
+			if(name.equals(bList.get(i).getName()) && 
+				id.equals(bList.get(i).getId())) {
+				bList.remove(i);
+			}
+			
+		}
 		
 		
 		
 	}
+	
+	
+	
 	
 	
 	
